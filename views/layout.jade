@@ -31,9 +31,9 @@ html
                 i.glyphicon.glyphicon-leaf
                 |  Examples
             li
-              a(href="/people", title="People on this Maki, an example resource.")
+              a(href="/users", title="People on this Maki, an example resource.")
                 i.glyphicon.glyphicon-user
-                |  People
+                |  Users
             if (!user)
               li
                 a(href="/register") Sign Up &raquo;
@@ -41,7 +41,7 @@ html
           ul.nav.navbar-nav.navbar-right
             if (user)
               li
-                a(href="/people/#{user.slug}") #{user.username}
+                a(href="/users/#{user.slug}") #{user.username}
               li
                 a(href="/logout") Log Out
             else
@@ -54,9 +54,11 @@ html
     footer
       .container
         p
-          small <a href="http://github.com/martindale/maki">Made</a> with care by <a href="http://www.ericmartindale.com/">Eric Martindale</a>.
-        p
-          a(class="coinbase-button", data-code="316e0eac837e964996b403a0a6e04930", data-button-style="custom_small", href="https://coinbase.com/checkouts/316e0eac837e964996b403a0a6e04930") Donate 
-            i.glyiphicon.glyphicon-bitcoin
-            |  BitCoin
-          script(src="https://coinbase.com/assets/button.js", type="text/javascript")
+          small A Fugitive Labs product
+        //- p
+        //-   small <a href="http://github.com/martindale/maki">Made</a> with care by <a href="http://www.ericmartindale.com/">Eric Martindale</a>.
+        //- p
+        //-   a(class="coinbase-button", data-code="316e0eac837e964996b403a0a6e04930", data-button-style="custom_small", href="https://coinbase.com/checkouts/316e0eac837e964996b403a0a6e04930") Donate 
+        //-     i.glyiphicon.glyphicon-bitcoin
+        //-     |  BitCoin
+        //-  script(src="https://coinbase.com/assets/button.js", type="text/javascript")

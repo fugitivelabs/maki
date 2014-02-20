@@ -10,11 +10,11 @@ var express = require('express')
 /* Models represent the data your application keeps. */
 /* You'll need at least the User model if you want to 
 	allow users to login */
-User = People = require('./models/User').User;
+User = require('./models/User').User;
 //Thing   = require('./models/Thing').Thing;
 
 pages    = require('./controllers/pages');
-people   = require('./controllers/people');
+users   = require('./controllers/users');
 
 // make the HTML output readible, for designers. :)
 app.locals.pretty = true;
@@ -69,7 +69,6 @@ app.use(function(req, res, next) {
           } else {
             res.send( resource );
           }
-          
         }
     });
   };
@@ -86,35 +85,10 @@ app.use(function(req, res, next) {
 /* this means: when a GET request is issued to (yourapp)/,
     ...execute a function with the [req]uest, [res]ponse, and
     the [next] function. */
-app.get('/', function(req, res) {
 
-  /* in this function, render the index template, 
-     using the [res]ponse. */
-  res.render('index', {
-    foo: 'bar' //this is an example variable to be sent to the rendering engine
-  });
-
-});
-
-app.get('/register', function(req, res) {
-  res.render('register');
-});
-
-app.get('/login', function(req, res) {
-  res.render('login');
-});
-
-/* when a POST request is made to '/register'... */
-app.post('/register', function(req, res) {
-  User.register(new User({ email : req.body.email, username : req.body.username }), req.body.password, function(err, user) {
-    if (err) {
-      console.log(err);
-      return res.render('register', { user : user });
-    }
-
-    res.redirect('/');
-  });
-});
+app.get('/register'                   , users.registerForm );
+app.get('/login'                      , users.loginForm );
+app.post('/register'                  , users.registerAction );
 
 app.post('/login', passport.authenticate('local'), function(req, res) {
   res.redirect('/');
@@ -125,11 +99,14 @@ app.get('/logout', function(req, res, next) {
   res.redirect('/');
 });
 
-app.get('/examples',             pages.examples );
-app.get('/people',               people.list );
-app.get('/people/:usernameSlug', people.view );
+app.get('/examples'                     , pages.examples );
+app.get('/users'                        , users.list );
+app.get('/users/:usernameSlug'          , users.view );
+
+app.get('/'                             , pages.index );
 
 app.listen( config.appPort , function() {
-  console.log('Demo application is now listening on http://localhost:' + config.appPort + ' ...');
+  console.log('Maki application is now listening on http://localhost:' + config.appPort + ' ...');
 });
+
 

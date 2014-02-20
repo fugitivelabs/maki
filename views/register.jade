@@ -4,6 +4,10 @@ block content
 
   h1 Register
 
+  -if(typeof(errorMessage) !== 'undefined')
+    h4(style="color:red;") #{errorMessage}
+    br
+
   form(action="/register", method="post")
     .form-group
       label(for="username") Username
